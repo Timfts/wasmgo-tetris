@@ -1,13 +1,12 @@
-package main
+package lib
 
-import "cart/src/w4"
+import "cart/w4"
 
-func setupColors() {
+func SetupColors() {
 	// generate palete by https://lospec.com/palette-list
-	w4.PALETTE[0] = 0x8cad28
-	w4.PALETTE[1] = 0x6c9421
-	w4.PALETTE[2] = 0x426b29
-	w4.PALETTE[3] = 0x214231
+	w4.PALETTE[0] = 0xd8dee9
+	w4.PALETTE[2] = 0x4c566a
+	w4.PALETTE[3] = 0x2e3440
 }
 
 var smiley = [8]byte{
@@ -21,6 +20,6 @@ var smiley = [8]byte{
 	0b11000011,
 }
 
-func drawSmile() {
+func DrawSmile() {
 	w4.Blit(&smiley[0], 76, 76, 8, 8, w4.BLIT_1BPP)
 }

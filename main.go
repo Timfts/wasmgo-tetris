@@ -1,6 +1,9 @@
 package main
 
-import "cart/src/w4"
+import (
+	"cart/lib"
+	"cart/w4"
+)
 
 // #region gameState
 var gameover = false
@@ -8,11 +11,12 @@ var gameover = false
 // #endregion
 
 func start() {
-	setupColors()
+	lib.SetupColors()
 }
 
 //go:export update
 func update() {
+	lib.SetupColors()
 	*w4.DRAW_COLORS = 2
 	w4.Text("potato", 10, 10)
 
@@ -21,7 +25,7 @@ func update() {
 		*w4.DRAW_COLORS = 4
 	}
 
-	drawSmile()
+	lib.DrawSmile()
 	w4.Text("Press X to blink", 16, 90)
 
 }
