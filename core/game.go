@@ -1,6 +1,10 @@
 package core
 
-import "cart/w4"
+import (
+	"cart/w4"
+
+	"strconv"
+)
 
 type GameState struct {
 	gameOver bool
@@ -33,12 +37,20 @@ func (s *Game) Setup() {
 }
 
 func (s *Game) Update() {
+	ui8ToString := func(value uint8) string {
+		return strconv.FormatUint(uint64(value), 10)
+	}
+
 	var gamepad = *w4.GAMEPAD1
-	var pressedThisFrame = gamepad & (gamepad ^ s.previousGamepad)
+
+	w4.Trace(ui8ToString((gamepad)))
+	var pressedPreviousAndCurrent = gamepad ^ s.previousGamepad
+	var onlyPressedThisFrame = gamepad & pressedPreviousAndCurrent
+
 	s.previousGamepad = gamepad
 
-	if pressedThisFrame&w4.BUTTON_LEFT != 0 {
-
+	if onlyPressedThisFrame&w4.BUTTON_LEFT != 0 {
+		w4.Trace("pressed left")
 	}
 
 	s.drawGUIBg()
