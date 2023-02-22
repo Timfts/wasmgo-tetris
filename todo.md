@@ -1,2 +1,5 @@
 replicate c++ version with functional approach
-refactor using uber fx
+
+
+convert PieceType to int to improve memory
+
