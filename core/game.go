@@ -4,18 +4,11 @@ import (
 	"cart/w4"
 )
 
-type GameState struct {
-	gameOver bool
-	level    int
-	score    int
-	best     int
-	lines    int
-}
-
 type Game struct {
-	state           GameState
-	previousGamepad byte
-	board           [BOARD_SIZE]string
+	state               GameState
+	previousGamepad     byte
+	board               [BOARD_SIZE]string
+	clearAnimationDelay byte
 }
 
 func NewGame() Game {
@@ -37,6 +30,9 @@ func (s *Game) Setup() {
 }
 
 func (s *Game) Update() {
+
+	// check for clear animation delay
+
 	/* 	ui8ToString := func(value uint8) string {
 	   		return strconv.FormatUint(uint64(value), 10)
 	   	}
@@ -57,10 +53,14 @@ func (s *Game) Update() {
 	s.drawGUIBg()
 	s.drawStats()
 
+	if s.clearAnimationDelay != 0 && !s.state.gameOver {
+		*w4.DRAW_COLORS = 0x42
+		// draw piece
+	}
+
 }
 
 func (s *Game) restart() {
-
 	s.state.gameOver = false
 }
 
