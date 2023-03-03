@@ -74,7 +74,7 @@ var PIECE_COORDS = []int8{
 	1, 0,
 }
 
-var PIECE_SPRITES = [][]uint8{
+var PIECE_SPRITES = [][8]uint8{
 	{
 		0b11111111,
 		0b10000001,
