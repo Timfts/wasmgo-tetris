@@ -9,6 +9,7 @@ type Game struct {
 	previousGamepad     byte
 	board               [BOARD_SIZE]string
 	clearAnimationDelay byte
+	piece               PieceType
 }
 
 func NewGame() Game {
@@ -49,7 +50,7 @@ func (s *Game) Update() {
 	   		w4.Trace("pressed left")
 	   	} */
 
-	s.drawPiece(J, 4, 6)
+	s.drawPiece(T, 4, 6)
 	s.drawGUIBg()
 	s.drawStats()
 
