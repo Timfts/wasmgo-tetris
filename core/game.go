@@ -46,20 +46,14 @@ func (s *Game) Update() {
 
 	logValue(coords[7])
 
-	/* 	ui8ToString := func(value uint8) string {
-	   		return strconv.FormatUint(uint64(value), 10)
-	   	}
-
-	   	var gamepad = *w4.GAMEPAD1
-
-	   	w4.Trace(ui8ToString((gamepad)))
+	/* 	var gamepad = *w4.GAMEPAD1
+	   	logValue(gamepad)
 	   	var pressedPreviousAndCurrent = gamepad ^ s.previousGamepad
 	   	var onlyPressedThisFrame = gamepad & pressedPreviousAndCurrent
-
 	   	s.previousGamepad = gamepad
 
 	   	if onlyPressedThisFrame&w4.BUTTON_LEFT != 0 {
-	   		w4.Trace("pressed left")
+	   		logValue("pressed left")
 	   	} */
 
 	s.drawPiece(s.piece.x, s.piece.y, s.piece.kind, s.piece.coords)

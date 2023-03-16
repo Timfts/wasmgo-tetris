@@ -32,6 +32,8 @@ func convertToString(value interface{}) string {
 		return strconv.FormatUint(uint64(value.(uint8)), 10)
 	case bool:
 		return strconv.FormatBool(value.(bool))
+	case string:
+		return value.(string)
 	default:
 		return ""
 	}
