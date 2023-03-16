@@ -18,12 +18,14 @@ func NewGame() Game {
 		gameOver: false,
 	}
 
-	var firstPieceType int8 = int8(rand.Intn(7))
+	firstPieceType := PieceType(rand.Intn(7))
+	pieceCoords := getPieceCoords(firstPieceType)
 
 	firstPiece := Piece{
-		x:    5,
-		y:    1,
-		kind: PieceType(firstPieceType),
+		x:      5,
+		y:      1,
+		kind:   firstPieceType,
+		coords: pieceCoords,
 	}
 
 	return Game{
@@ -60,7 +62,7 @@ func (s *Game) Update() {
 	   		w4.Trace("pressed left")
 	   	} */
 
-	s.drawPiece(T, 4, 6)
+	s.drawPiece(s.piece.x, s.piece.y, s.piece.kind, s.piece.coords)
 	s.drawGUIBg()
 	s.drawStats()
 
@@ -85,7 +87,6 @@ func (s *Game) drawStats() {
 	w4.Text("2", 104, 24+2)
 	w4.Text("3", 104, 48+2)
 	w4.Text("4", 104, 72+2)
-
 }
 
 func (s *Game) drawGUIBg() {
@@ -114,9 +115,12 @@ func (s *Game) drawBlock(pieceType PieceType, x int, y int, disabled bool) {
 	w4.Blit(&spriteToUse[0], BOARD_OFFSET_X+x, y, 8, 8, w4.BLIT_1BPP)
 }
 
-func (s *Game) drawPiece(pieceType PieceType, X int, y int) {
-
-	for i := 0; i < 4; i++ {
-		s.drawBlock(pieceType, 6*i, 6*i, false)
+func (s *Game) drawPiece(x uint8, y uint8, pieceType PieceType, pieceCoords [8]int8) {
+	c := 0
+	for n := 0; n < 4; n++ {
+		cx := int(pieceCoords[c])
+		cy := int(pieceCoords[c+1])
+		s.drawBlock(pieceType, 8*(int(x)+cx), 8*(int(y)+cy), false)
+		c += 2
 	}
 }

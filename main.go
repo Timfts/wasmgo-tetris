@@ -13,7 +13,5 @@ func start() {
 
 //go:export update
 func update() {
-
 	gameInstance.Update()
-
 }
