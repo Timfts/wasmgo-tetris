@@ -2,6 +2,7 @@ package core
 
 import (
 	"cart/w4"
+	"math/rand"
 )
 
 type Game struct {
@@ -9,17 +10,25 @@ type Game struct {
 	previousGamepad     byte
 	board               [BOARD_SIZE]string
 	clearAnimationDelay byte
-	piece               PieceType
+	piece               Piece
 }
 
 func NewGame() Game {
-	// setup initial state
 	initialState := GameState{
 		gameOver: false,
 	}
 
+	var firstPieceType int8 = int8(rand.Intn(7))
+
+	firstPiece := Piece{
+		x:    5,
+		y:    1,
+		kind: PieceType(firstPieceType),
+	}
+
 	return Game{
 		state: initialState,
+		piece: firstPiece,
 	}
 }
 
@@ -31,8 +40,9 @@ func (s *Game) Setup() {
 }
 
 func (s *Game) Update() {
+	coords := getPieceCoords(J)
 
-	// check for clear animation delay
+	logValue(coords[7])
 
 	/* 	ui8ToString := func(value uint8) string {
 	   		return strconv.FormatUint(uint64(value), 10)
