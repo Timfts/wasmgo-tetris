@@ -2,7 +2,6 @@ package core
 
 import (
 	"cart/w4"
-	"math/rand"
 )
 
 type Game struct {
@@ -17,17 +16,7 @@ func NewGame() Game {
 	initialState := GameState{
 		gameOver: false,
 	}
-
-	firstPieceType := PieceType(rand.Intn(7))
-	pieceCoords := getPieceCoords(firstPieceType)
-
-	firstPiece := Piece{
-		x:      5,
-		y:      1,
-		kind:   firstPieceType,
-		coords: pieceCoords,
-	}
-
+	firstPiece := getRandomPiece(5, 1)
 	return Game{
 		state: initialState,
 		piece: firstPiece,
@@ -56,19 +45,18 @@ func (s *Game) Update() {
 	   		logValue("pressed left")
 	   	} */
 
+	s.drawStaticParts()
 	s.drawPiece(s.piece.x, s.piece.y, s.piece.kind, s.piece.coords)
-	s.drawGUIBg()
-	s.drawStats()
-
-	if s.clearAnimationDelay != 0 && !s.state.gameOver {
-		*w4.DRAW_COLORS = 0x42
-		// draw piece
-	}
 
 }
 
 func (s *Game) restart() {
 	s.state.gameOver = false
+}
+
+func (s *Game) drawStaticParts() {
+	s.drawGUIBg()
+	s.drawStats()
 }
 
 func (s *Game) drawStats() {

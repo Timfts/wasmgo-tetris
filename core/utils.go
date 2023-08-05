@@ -2,6 +2,7 @@ package core
 
 import (
 	"cart/w4"
+	"math/rand"
 	"strconv"
 )
 
@@ -41,4 +42,16 @@ func convertToString(value interface{}) string {
 
 func logValue(value interface{}) {
 	w4.Trace(convertToString(value))
+}
+
+func getRandomPiece(x uint8, y uint8) Piece {
+	pieceType := PieceType(rand.Intn(7))
+	pieceCoords := getPieceCoords(pieceType)
+
+	return Piece{
+		kind:   pieceType,
+		coords: pieceCoords,
+		x:      x,
+		y:      y,
+	}
 }
